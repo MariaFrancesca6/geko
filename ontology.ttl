@@ -1,0 +1,336 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.w3.org/2002/07/owl#> .
+
+[ rdf:type owl:Ontology
+ ] .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://purl.org/dc/terms/creator
+<http://purl.org/dc/terms/creator> rdf:type owl:ObjectProperty ;
+                                   rdfs:domain <http://www.w3.org/ns/oa#Annotation> ;
+                                   rdfs:range <http://xmlns.com/foaf/0.1/Person> .
+
+
+###  http://purl.org/dc/terms/isPartOf
+<http://purl.org/dc/terms/isPartOf> rdf:type owl:ObjectProperty ;
+                                    rdfs:domain <http://iiif.io/api/model/shared-canvas/1.0/#Canvas> ;
+                                    rdfs:range <http://iiif.io/api/model/shared-canvas/1.0/#Manifest> .
+
+
+###  http://purl.org/emmedi/hico/hasInterpretationCriterion
+<http://purl.org/emmedi/hico/hasInterpretationCriterion> rdf:type owl:ObjectProperty ;
+                                                         rdfs:domain <http://purl.org/emmedi/hico/InterpretationAct> ;
+                                                         rdfs:range <http://purl.org/emmedi/hico/InterpretationCriterion> .
+
+
+###  http://purl.org/emmedi/hico/hasInterpretationType
+<http://purl.org/emmedi/hico/hasInterpretationType> rdf:type owl:ObjectProperty ;
+                                                    rdfs:domain <http://purl.org/emmedi/hico/InterpretationAct> ;
+                                                    rdfs:range <http://purl.org/emmedi/hico/InterpretationType> .
+
+
+###  http://w3id.org/geko/hasEkphrasticModality
+<http://w3id.org/geko/hasEkphrasticModality> rdf:type owl:ObjectProperty ;
+                                             rdfs:domain <http://www.w3.org/ns/oa#Annotation> ;
+                                             rdfs:range <https://w3id.org/geko/Denotation> ,
+                                                        <https://w3id.org/geko/Dynamization> ,
+                                                        <https://w3id.org/geko/Integration> ;
+                                             rdfs:comment "The modality links the annotation to the ekphrasis' rhetorical modalities." ;
+                                             rdfs:label "has Ekphrastic Modality" .
+
+
+###  http://w3id.org/geko/hasForm
+<http://w3id.org/geko/hasForm> rdf:type owl:ObjectProperty ;
+                               rdfs:domain <https://w3id.org/geko/Ekphrasis> ;
+                               rdfs:range <https://w3id.org/geko/Mimetic> ,
+                                          <https://w3id.org/geko/Notional> ;
+                               rdfs:comment "The form assumed by the ekphrastic text, describing a real visual art work or an imagined one." ;
+                               rdfs:label "has Form" .
+
+
+###  http://w3id.org/geko/hasIconicReferent
+<http://w3id.org/geko/hasIconicReferent> rdf:type owl:ObjectProperty ;
+                                         rdfs:domain <https://w3id.org/geko/Ekphrasis> ;
+                                         rdfs:range <http://iflastandards.info/ns/lrm/lrmoo/F1_Work> ;
+                                         rdfs:comment "The iconic component of the ekphrasis." ;
+                                         rdfs:label "has Iconic Referent" .
+
+
+###  http://w3id.org/geko/hasTextualReferent
+<http://w3id.org/geko/hasTextualReferent> rdf:type owl:ObjectProperty ;
+                                          rdfs:domain <https://w3id.org/geko/Ekphrasis> ;
+                                          rdfs:range <http://iflastandards.info/ns/lrm/lrmoo/F2_Expression> ;
+                                          rdfs:comment "The textual component of the ekphrasis." ;
+                                          rdfs:label "has Textual Referent" .
+
+
+###  http://w3id.org/mlao/hasAnchor
+<http://w3id.org/mlao/hasAnchor> rdf:type owl:ObjectProperty ;
+                                 rdfs:domain <http://www.w3.org/ns/oa#Annotation> ;
+                                 rdfs:range <http://w3id.org/mlao/Anchor> .
+
+
+###  http://w3id.org/mlao/hasConceptualLevel
+<http://w3id.org/mlao/hasConceptualLevel> rdf:type owl:ObjectProperty ;
+                                          rdfs:domain <http://w3id.org/mlao/Anchor> ;
+                                          rdfs:range <https://w3id.org/icon/ontology/IconographicalSubject> ,
+                                                     <https://w3id.org/icon/ontology/IconologicalSubject> ,
+                                                     <https://w3id.org/icon/ontology/PreiconographicalSubject> .
+
+
+###  http://w3id.org/mlao/isAnchoredTo
+<http://w3id.org/mlao/isAnchoredTo> rdf:type owl:ObjectProperty ;
+                                    rdfs:domain <http://w3id.org/mlao/Anchor> ;
+                                    rdfs:range <http://erlangen-crm.org/current/E1_Entity> .
+
+
+###  http://www.w3.org/ns/oa#hasBody
+<http://www.w3.org/ns/oa#hasBody> rdf:type owl:ObjectProperty ;
+                                  rdfs:domain <http://www.w3.org/ns/oa#Annotation> ;
+                                  rdfs:range <http://www.w3.org/ns/oa#TextualBody> .
+
+
+###  http://www.w3.org/ns/oa#hasSelector
+<http://www.w3.org/ns/oa#hasSelector> rdf:type owl:ObjectProperty ;
+                                      rdfs:domain <http://www.w3.org/ns/oa#SpecificResource> ;
+                                      rdfs:range <http://www.w3.org/ns/oa#FragmentSelector> ,
+                                                 <http://www.w3.org/ns/oa#XPathSelector> .
+
+
+###  http://www.w3.org/ns/oa#hasSource
+<http://www.w3.org/ns/oa#hasSource> rdf:type owl:ObjectProperty ;
+                                    rdfs:domain <http://www.w3.org/ns/oa#SpecificResource> ;
+                                    rdfs:range <http://iiif.io/api/model/shared-canvas/1.0/#Canvas> ,
+                                               <http://www.w3.org/ns/oa#Text> .
+
+
+###  http://www.w3.org/ns/oa#hasTarget
+<http://www.w3.org/ns/oa#hasTarget> rdf:type owl:ObjectProperty ;
+                                    rdfs:domain <http://www.w3.org/ns/oa#Annotation> ;
+                                    rdfs:range <http://www.w3.org/ns/oa#Annotation> ,
+                                               <http://www.w3.org/ns/oa#SpecificResource> .
+
+
+###  http://www.w3.org/ns/oa#motivatedBy
+<http://www.w3.org/ns/oa#motivatedBy> rdf:type owl:ObjectProperty ;
+                                      rdfs:domain <http://www.w3.org/ns/oa#Annotation> ;
+                                      rdfs:range <http://www.w3.org/ns/oa#Motivation> .
+
+
+###  http://www.w3.org/ns/prov#hadMember
+<http://www.w3.org/ns/prov#hadMember> rdf:type owl:ObjectProperty ;
+                                      rdfs:domain <https://w3id.org/geko/Ekphrasis> ;
+                                      rdfs:range <http://www.w3.org/ns/oa#Annotation> .
+
+
+###  http://www.w3.org/ns/prov#wasGeneratedBy
+<http://www.w3.org/ns/prov#wasGeneratedBy> rdf:type owl:ObjectProperty ;
+                                           rdfs:domain <http://www.w3.org/ns/oa#Annotation> ;
+                                           rdfs:range <http://purl.org/emmedi/hico/InterpretationAct> .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://purl.org/dc/terms/created
+<http://purl.org/dc/terms/created> rdf:type owl:DatatypeProperty ;
+                                   rdfs:domain <http://www.w3.org/ns/oa#Annotation> ;
+                                   rdfs:range xsd:dateTime .
+
+
+###  http://www.w3.org/1999/02/22-rdf-syntax-ns#value
+rdf:value rdf:type owl:DatatypeProperty ;
+          rdfs:domain <http://www.w3.org/ns/oa#FragmentSelector> ,
+                      <http://www.w3.org/ns/oa#TextualBody> ,
+                      <http://www.w3.org/ns/oa#XPathSelector> ;
+          rdfs:range xsd:string .
+
+
+###  http://www.w3.org/ns/prov#startedAtTime
+<http://www.w3.org/ns/prov#startedAtTime> rdf:type owl:DatatypeProperty ;
+                                          rdfs:domain <http://purl.org/emmedi/hico/InterpretationAct> ;
+                                          rdfs:range xsd:dateTime .
+
+
+###  http://xmlns.com/foaf/0.1/name
+<http://xmlns.com/foaf/0.1/name> rdf:type owl:DatatypeProperty ;
+                                 rdfs:domain <http://xmlns.com/foaf/0.1/Person> ;
+                                 rdfs:range xsd:string .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://erlangen-crm.org/current/E1_Entity
+<http://erlangen-crm.org/current/E1_Entity> rdf:type owl:Class .
+
+
+###  http://iflastandards.info/ns/lrm/lrmoo/F1_Work
+<http://iflastandards.info/ns/lrm/lrmoo/F1_Work> rdf:type owl:Class .
+
+
+###  http://iflastandards.info/ns/lrm/lrmoo/F2_Expression
+<http://iflastandards.info/ns/lrm/lrmoo/F2_Expression> rdf:type owl:Class .
+
+
+###  http://iiif.io/api/model/shared-canvas/1.0/#Canvas
+<http://iiif.io/api/model/shared-canvas/1.0/#Canvas> rdf:type owl:Class .
+
+
+###  http://iiif.io/api/model/shared-canvas/1.0/#Manifest
+<http://iiif.io/api/model/shared-canvas/1.0/#Manifest> rdf:type owl:Class .
+
+
+###  http://purl.org/emmedi/hico/InterpretationAct
+<http://purl.org/emmedi/hico/InterpretationAct> rdf:type owl:Class .
+
+
+###  http://purl.org/emmedi/hico/InterpretationCriterion
+<http://purl.org/emmedi/hico/InterpretationCriterion> rdf:type owl:Class .
+
+
+###  http://purl.org/emmedi/hico/InterpretationType
+<http://purl.org/emmedi/hico/InterpretationType> rdf:type owl:Class .
+
+
+###  http://w3id.org/mlao/Anchor
+<http://w3id.org/mlao/Anchor> rdf:type owl:Class .
+
+
+###  http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity
+<http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity> rdf:type owl:Class .
+
+
+###  http://www.cidoc-crm.org/cidoc-crm/E89_Propositional_Object
+<http://www.cidoc-crm.org/cidoc-crm/E89_Propositional_Object> rdf:type owl:Class .
+
+
+###  http://www.w3.org/2002/07/owl#DataProperty
+owl:DataProperty rdf:type owl:Class .
+
+
+###  http://www.w3.org/ns/oa#Annotation
+<http://www.w3.org/ns/oa#Annotation> rdf:type owl:Class ;
+                                     owl:equivalentClass <http://www.w3.org/ns/prov#Entity> .
+
+
+###  http://www.w3.org/ns/oa#FragmentSelector
+<http://www.w3.org/ns/oa#FragmentSelector> rdf:type owl:Class .
+
+
+###  http://www.w3.org/ns/oa#Motivation
+<http://www.w3.org/ns/oa#Motivation> rdf:type owl:Class .
+
+
+###  http://www.w3.org/ns/oa#SpecificResource
+<http://www.w3.org/ns/oa#SpecificResource> rdf:type owl:Class .
+
+
+###  http://www.w3.org/ns/oa#Text
+<http://www.w3.org/ns/oa#Text> rdf:type owl:Class .
+
+
+###  http://www.w3.org/ns/oa#TextualBody
+<http://www.w3.org/ns/oa#TextualBody> rdf:type owl:Class .
+
+
+###  http://www.w3.org/ns/oa#XPathSelector
+<http://www.w3.org/ns/oa#XPathSelector> rdf:type owl:Class .
+
+
+###  http://www.w3.org/ns/prov#Collection
+<http://www.w3.org/ns/prov#Collection> rdf:type owl:Class ;
+                                       owl:equivalentClass <https://w3id.org/geko/Ekphrasis> .
+
+
+###  http://www.w3.org/ns/prov#Entity
+<http://www.w3.org/ns/prov#Entity> rdf:type owl:Class .
+
+
+###  http://xmlns.com/foaf/0.1/Person
+<http://xmlns.com/foaf/0.1/Person> rdf:type owl:Class .
+
+
+###  https://w3id.org/geko/Denotation
+<https://w3id.org/geko/Denotation> rdf:type owl:Class ;
+                                   rdfs:comment "The denotation modality is the explicit mention of an artwork and its attributes in a text." ;
+                                   rdfs:label "Denotation" .
+
+
+###  https://w3id.org/geko/Dynamization
+<https://w3id.org/geko/Dynamization> rdf:type owl:Class ;
+                                     rdfs:comment "The dynamization modality is the dramatization or enactment of the artwork, possibly imagining events unfolding in the described scene." ;
+                                     rdfs:label "Dynamization" .
+
+
+###  https://w3id.org/geko/Ekphrasis
+<https://w3id.org/geko/Ekphrasis> rdf:type owl:Class ;
+                                  rdfs:subClassOf <http://www.cidoc-crm.org/cidoc-crm/E89_Propositional_Object> ;
+                                  rdfs:comment "An ekphrasis is the textual description of a visual work of art, whether real or imagined. It is composed by two key elements: the textual referent and the iconic referent." ;
+                                  rdfs:label "Ekphrasis" .
+
+
+###  https://w3id.org/geko/Integration
+<https://w3id.org/geko/Integration> rdf:type owl:Class ;
+                                    rdfs:comment "The integration modality is the addition of references to the recipient’s personal and cultural experiences." ;
+                                    rdfs:label "Integration" .
+
+
+###  https://w3id.org/geko/Mimetic
+<https://w3id.org/geko/Mimetic> rdf:type owl:Class ;
+                                rdfs:comment "A mimetic (or real) ekphrasis describes an actual, physically existing work of art." ;
+                                rdfs:label "Mimetic" .
+
+
+###  https://w3id.org/geko/Notional
+<https://w3id.org/geko/Notional> rdf:type owl:Class ;
+                                 rdfs:comment "A notional (or imagined) ekphrasis describes an artwork that does not exist outside the text itself." ;
+                                 rdfs:label "Notional" .
+
+
+###  https://w3id.org/icon/ontology/IconographicalSubject
+<https://w3id.org/icon/ontology/IconographicalSubject> rdf:type owl:Class .
+
+
+###  https://w3id.org/icon/ontology/IconologicalSubject
+<https://w3id.org/icon/ontology/IconologicalSubject> rdf:type owl:Class .
+
+
+###  https://w3id.org/icon/ontology/PreiconographicalSubject
+<https://w3id.org/icon/ontology/PreiconographicalSubject> rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://purl.org/dc/terms/created
+<http://purl.org/dc/terms/created> rdf:type owl:NamedIndividual ,
+                                            owl:DataProperty .
+
+
+###  http://www.w3.org/1999/02/22-rdf-syntax-ns#value
+rdf:value rdf:type owl:NamedIndividual ,
+                   owl:DataProperty .
+
+
+###  http://www.w3.org/ns/prov#startedAtTime
+<http://www.w3.org/ns/prov#startedAtTime> rdf:type owl:NamedIndividual ,
+                                                   owl:DataProperty .
+
+
+###  http://xmlns.com/foaf/0.1/name
+<http://xmlns.com/foaf/0.1/name> rdf:type owl:NamedIndividual ,
+                                          owl:DataProperty .
+
+
+###  Generated by the OWL API (version 5.1.18) https://github.com/owlcs/owlapi/
