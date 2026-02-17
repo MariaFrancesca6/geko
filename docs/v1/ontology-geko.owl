@@ -33,7 +33,7 @@
     <!-- http://www.w3.org/ns/oa#Annotation -->
     <owl:Class rdf:about="http://www.w3.org/ns/oa#Annotation">
         <owl:equivalentClass rdf:resource="http://www.w3.org/ns/prov#Entity"/>
-    <owl:Class/>
+    </owl:Class>
 
     <!-- http://www.w3.org/ns/oa#SpecificResource -->
     <owl:Class rdf:about="http://www.w3.org/ns/oa#SpecificResource"/>
