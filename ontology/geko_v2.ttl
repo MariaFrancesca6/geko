@@ -1,0 +1,177 @@
+@prefix geko: <https://w3id.org/geko/#> .
+@prefix mlao: <https://w3id.org/mlao/#> .
+@prefix icon: <https://w3id.org/icon/ontology/> .
+@prefix hico: <http://purl.org/emmedi/hico/> .
+@prefix crm: <http://www.cidoc-crm.org/cidoc-crm/> .
+@prefix lrmoo: <http://iflastandards.info/ns/lrm/lrmoo/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sc: <https://iiif.io/api/model/shared-canvas/1.0/#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+<https://w3id.org/geko/#> a owl:Ontology ;
+    owl:versionIRI <https://w3id.org/geko/v2/#> ; 
+    owl:priorVersion <https://w3id.org/geko/v1/#> ; 
+    owl:versionInfo "2.0.0" ;
+    dct:title "GEkO Ontology v2" ;
+    dct:description "GEkO Ontology describes the phenomenon of ekphrasis along with technical implementation of image-text relations using annotations."@en ;
+    dct:creator <https://orcid.org/0009-0003-0559-0409> ;
+    skos:changeNote "**Version 2 Changelog** Introduction of four aspects: - hasForm ObjectProperty deprecated; NotionalEkphrasis and MimeticEkphrasis classes become subClassOf Ekphrasis - Aligment of Ekphrasis with CIDOC-CRM instantiated as subClassOf E33_Linguistic_Object - Transition to SKOS Concept to identify the ekphrastic modelities (denotation, dynamization, integration), prior modeled as classes - Definition of an ObjectProperty hasAuthor for signaling the author of Ekphrasis, more specifical than dct:creator"@en .
+
+# Classes
+
+geko:Ekphrasis a owl:Class ;
+    rdfs:subClassOf crm:E33_Linguistic_Object, prov:Collection ;
+    rdfs:comment "The Ekphrasis entity, modeled as a Linguistic Object and a Collection of Annotations."@en .
+
+geko:MimeticEkphrasis a owl:Class ;
+    rdfs:subClassOf geko:Ekphrasis ;
+    rdfs:comment "An ekphrasis describing a real, physically existing artwork."@en .
+
+geko:NotionalEkphrasis a owl:Class ;
+    rdfs:subClassOf geko:Ekphrasis ;
+    rdfs:comment "An ekphrasis describing an imagined artwork that exists only within the describing text."@en .
+
+geko:MimeticEkphrasis owl:disjointWith geko:NotionalEkphrasis .
+geko:NotionalEkphrasis owl:disjointWith geko:MimeticEkphrasis .
+
+# Object Properties
+
+geko:hasTextualReferent a owl:ObjectProperty ;
+    rdfs:domain geko:Ekphrasis ;
+    rdfs:range lrmoo:F2_Expression ;
+    owl:inverseOf geko:isTextualReferentOf ;
+    rdfs:comment "Links the ekphrasis to the specific textual expression containing the description."@en .
+
+geko:isTextualReferentOf a owl:ObjectProperty ;
+    rdfs:domain lrmoo:F2_Expression ;
+    rdfs:range geko:Ekphrasis .
+
+geko:hasIconicReferent a owl:ObjectProperty ;
+    rdfs:domain geko:Ekphrasis ;
+    rdfs:range lrmoo:F1_Work ; 
+    owl:inverseOf geko:isIconicReferentOf ;
+    rdfs:comment "Links the ekphrasis to the visual artwork described, indetifiable as a Work entity according to FRBR WEMI structure."@en .
+
+geko:isIconicReferentOf a owl:ObjectProperty ;
+    rdfs:domain lrmoo:F1_Work ;
+    rdfs:range geko:Ekphrasis .
+
+geko:hasEkphrasticModality a owl:ObjectProperty ;
+    rdfs:domain oa:Annotation ;
+    rdfs:range skos:Concept ;
+    rdfs:comment "Indicates the rhetorical modality recognizable in a textual passage within ekphrastic description"@en .
+
+geko:hasAuthor a owl:ObjectProperty ;
+    rdfs:domain geko:Ekphrasis ; 
+    rdfs:range foaf:Person ;
+    owl:inverseOf geko:isAuthorOf ;
+    rdfs:comment "The author of the ekphrasis."@en .
+
+geko:isAuthorOf a owl:ObjectProperty ;
+    rdfs:domain foaf:Person ;
+    rdfs:range geko:Ekphrasis .
+
+geko:modalitiesScheme a skos:ConceptScheme ;
+    dct:title "Ekphrastic Modalities"@en ;
+    skos:prefLabel "Ekphrastic modalities scheme"@en ;
+    skos:definition "Controlled vocabulary of modalities used in GEkO2 to characterize ekphrastic rhetorical modalities."@en .
+
+geko:denotation a skos:Concept ;
+    skos:inScheme geko:modalitiesScheme ;
+    skos:prefLabel "Denotation"@en ;
+    skos:definition "Modality through which the text engages with the referenced visual object, mainly characterized by indexical relations and verbal identification of visible attributes in the scene."@en .
+
+geko:dynamization a skos:Concept ;
+    skos:inScheme geko:modalitiesScheme ;
+    skos:prefLabel "Dynamization"@en ;
+    skos:definition "Modality in which the text engages with the referenced object, mainly by describing the scene characterized by a dynamic movement."@en .
+
+geko:integration a skos:Concept ;
+    skos:inScheme geko:modalitiesScheme ;
+    skos:prefLabel "Integration"@en ;
+    skos:definition "Modality in which the text engages with the referenced object by integrating the description with elements or symbolic content not directly pertaining to the scene in a strict sense."@en .
+
+crm:E33_Linguistic_Object a owl:Class .
+crm:E1_CRM_Entity a owl:Class .
+lrmoo:F1_Work a owl:Class . 
+lrmoo:F2_Expression a owl:Class .
+oa:Annotation a owl:Class; 
+    rdfs:subClassOf prov:Entity .
+oa:FragmentSelector a owl:Class .
+oa:Motivation a owl:Class .
+oa:SpecificResource a owl:Class .
+oa:Text a owl:Class .
+oa:TextualBody a owl:Class .
+oa:XPathSelector a owl:Class .
+sc:Manifest a owl:Class .
+sc:Canvas a owl:Class .
+prov:Collection a owl:Class .
+prov:Entity a owl:Class .
+foaf:Person a owl:Class .
+skos:Concept a owl:Class .
+skos:ConceptScheme a owl:Class .
+mlao:Anchor a owl:Class .
+icon:PreiconographicalSubject a owl:Class .
+icon:IconographicalSubject a owl:Class .
+icon:IconologicalSubject a owl:Class .
+hico:InterpretationAct a owl:Class .
+hico:InterpretationType a owl:Class .
+hico:InterpretationCriterion a owl:Class .
+
+# Properties
+
+prov:hadMember a owl:ObjectProperty ;
+    rdfs:domain geko:Ekphrasis ; 
+    rdfs:range oa:Annotation .
+
+oa:hasBody a owl:ObjectProperty ;
+    rdfs:comment "In GEkO it is the proporty that connects an annotation to its body intended as the ekphrastic textual passage identified by the annotator."@en .
+oa:hasTarget a owl:ObjectProperty ;
+    rdfs:comment "In GEkO it is the property that connects the textual passage to the informational layer. In GEkO the target is double, the first connecting the text to the digital fascimile in which it is contained, the second connecting the text to the digital reproduction of the visual object described. Typically, the two targets address canvas of a IIIF manifest."@en .
+oa:motivatedBy a owl:ObjectProperty .
+oa:hasSelector a owl:ObjectProperty .
+oa:hasSource a owl:ObjectProperty .
+dct:isPartOf a owl:ObjectProperty .
+
+mlao:hasAnchor a owl:ObjectProperty ;
+    rdfs:domain oa:Annotation ;
+    rdfs:range mlao:Anchor ; 
+    rdfs:comment "This property links the annotation to the conceptual referent of the annotation."@en .
+
+mlao:isAnchoredTo a owl:ObjectProperty ;
+    rdfs:domain mlao:Anchor ;
+    rdfs:range crm:E1_CRM_Entity .
+
+mlao:hasConceptualLevel a owl:ObjectProperty ;
+    rdfs:domain mlao:Anchor ;
+    rdfs:range [ a owl:Class ; 
+                 owl:unionOf ( icon:PreiconographicalSubject 
+                               icon:IconographicalSubject 
+                               icon:IconologicalSubject ) ] .
+
+prov:wasGeneratedBy a owl:ObjectProperty ;
+    rdfs:domain oa:Annotation ;
+    rdfs:range hico:InterpretationAct .
+
+hico:hasInterpretationType a owl:ObjectProperty .
+hico:hasInterpretationCriterion a owl:ObjectProperty .
+
+# Data Properties 
+
+dct:created a owl:DatatypeProperty ;
+    rdfs:range xsd:dateTime .
+
+rdf:value a owl:DatatypeProperty ;
+    rdfs:range xsd:string .
+
+foaf:name a owl:DatatypeProperty ;
+    rdfs:domain foaf:Person ;
+    rdfs:range xsd:string .

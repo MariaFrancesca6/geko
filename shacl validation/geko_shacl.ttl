@@ -1,0 +1,376 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix geko: <https://w3id.org/geko/#> .
+@prefix mlao: <https://w3id.org/mlao/#> .
+@prefix icon: <https://w3id.org/icon/ontology/> .
+@prefix hico: <http://purl.org/emmedi/hico/> .
+@prefix crm: <http://www.cidoc-crm.org/cidoc-crm/> .
+@prefix lrmoo: <http://iflastandards.info/ns/lrm/lrmoo/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix geko-sh: <https://w3id.org/geko/shacl/#> .
+
+# =============================================================================
+# SHACL Shapes for GEkO v2 (Ontology of Ekphrasis)
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# 1. EkphrasisShape
+#    Validates instances of geko:Ekphrasis (and subclasses).
+#    An Ekphrasis must have an author, a textual referent, an iconic referent,
+#    and at least one annotation as member.
+# -----------------------------------------------------------------------------
+
+geko-sh:EkphrasisShape a sh:NodeShape ;
+    sh:targetClass geko:Ekphrasis ;
+    sh:name "Ekphrasis shape" ;
+    sh:description "Validates the structure of an Ekphrasis entity." ;
+
+    # Must link to at least one author (foaf:Person)
+    sh:property [
+        sh:path geko:hasAuthor ;
+        sh:minCount 1 ;
+        sh:class foaf:Person ;
+        sh:name "hasAuthor" ;
+        sh:message "An Ekphrasis must have at least one geko:hasAuthor pointing to a foaf:Person." ;
+    ] ;
+
+    # Must link to exactly one textual referent (lrmoo:F2_Expression)
+    sh:property [
+        sh:path geko:hasTextualReferent ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class lrmoo:F2_Expression ;
+        sh:name "hasTextualReferent" ;
+        sh:message "An Ekphrasis must have exactly one geko:hasTextualReferent pointing to a lrmoo:F2_Expression." ;
+    ] ;
+
+    # Must link to exactly one iconic referent (lrmoo:F1_Work)
+    sh:property [
+        sh:path geko:hasIconicReferent ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class lrmoo:F1_Work ;
+        sh:name "hasIconicReferent" ;
+        sh:message "An Ekphrasis must have exactly one geko:hasIconicReferent pointing to a lrmoo:F1_Work." ;
+    ] ;
+
+    # Must have at least one annotation as member
+    sh:property [
+        sh:path prov:hadMember ;
+        sh:minCount 1 ;
+        sh:class oa:Annotation ;
+        sh:name "hadMember (annotations)" ;
+        sh:message "An Ekphrasis must contain at least one oa:Annotation via prov:hadMember." ;
+    ] .
+
+
+# -----------------------------------------------------------------------------
+# 2. MimeticEkphrasisShape / NotionalEkphrasisShape
+#    Enforce disjointness: an instance cannot be both.
+# -----------------------------------------------------------------------------
+
+geko-sh:MimeticEkphrasisShape a sh:NodeShape ;
+    sh:targetClass geko:MimeticEkphrasis ;
+    sh:name "Mimetic Ekphrasis shape" ;
+    sh:description "A mimetic ekphrasis must not also be a notional ekphrasis." ;
+    sh:not [
+        sh:class geko:NotionalEkphrasis ;
+    ] .
+
+geko-sh:NotionalEkphrasisShape a sh:NodeShape ;
+    sh:targetClass geko:NotionalEkphrasis ;
+    sh:name "Notional Ekphrasis shape" ;
+    sh:description "A notional ekphrasis must not also be a mimetic ekphrasis." ;
+    sh:not [
+        sh:class geko:MimeticEkphrasis ;
+    ] .
+
+
+# -----------------------------------------------------------------------------
+# 3. AnnotationShape
+#    Validates oa:Annotation instances used within an Ekphrasis.
+#    Each annotation must have a body (TextualBody), at least one target,
+#    an ekphrastic modality, an anchor, and provenance.
+# -----------------------------------------------------------------------------
+
+geko-sh:AnnotationShape a sh:NodeShape ;
+    sh:targetClass oa:Annotation ;
+    sh:name "Annotation shape" ;
+    sh:description "Validates the structure of a Web Annotation in GEkO context." ;
+
+    # Must have at least one body (oa:TextualBody)
+    sh:property [
+        sh:path oa:hasBody ;
+        sh:minCount 1 ;
+        sh:name "hasBody" ;
+        sh:message "An Annotation must have at least one oa:hasBody." ;
+    ] ;
+
+    # Must have at least one target (typically oa:SpecificResource)
+    sh:property [
+        sh:path oa:hasTarget ;
+        sh:minCount 1 ;
+        sh:name "hasTarget" ;
+        sh:message "An Annotation must have at least one oa:hasTarget." ;
+    ] ;
+
+    # Must declare at least one ekphrastic modality from the controlled vocabulary
+    sh:property [
+        sh:path geko:hasEkphrasticModality ;
+        sh:minCount 1 ;
+        sh:in ( geko:denotation geko:dynamization geko:integration ) ;
+        sh:name "hasEkphrasticModality" ;
+        sh:message "An Annotation must have at least one geko:hasEkphrasticModality from {denotation, dynamization, integration}." ;
+    ] ;
+
+    # Must have an anchor (mlao:Anchor)
+    sh:property [
+        sh:path mlao:hasAnchor ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class mlao:Anchor ;
+        sh:name "hasAnchor" ;
+        sh:message "An Annotation must have exactly one mlao:hasAnchor pointing to an mlao:Anchor." ;
+    ] ;
+
+    # Must have provenance via prov:wasGeneratedBy -> hico:InterpretationAct
+    sh:property [
+        sh:path prov:wasGeneratedBy ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class hico:InterpretationAct ;
+        sh:name "wasGeneratedBy" ;
+        sh:message "An Annotation must have exactly one prov:wasGeneratedBy pointing to a hico:InterpretationAct." ;
+    ] .
+
+
+# -----------------------------------------------------------------------------
+# 4. TextualBodyShape
+#    Validates oa:TextualBody used as annotation body.
+# -----------------------------------------------------------------------------
+
+geko-sh:TextualBodyShape a sh:NodeShape ;
+    sh:targetClass oa:TextualBody ;
+    sh:name "Textual Body shape" ;
+    sh:description "Validates the structure of an annotation body." ;
+
+    # Must have textual content
+    sh:property [
+        sh:path rdf:value ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:minLength 1 ;
+        sh:name "value" ;
+        sh:message "A TextualBody must have exactly one non-empty rdf:value of type xsd:string." ;
+    ] ;
+
+    # Should declare format
+    sh:property [
+        sh:path dc:format ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:name "format" ;
+        sh:severity sh:Warning ;
+        sh:message "A TextualBody should declare a dc:format (e.g. 'text/plain')." ;
+    ] .
+
+
+# -----------------------------------------------------------------------------
+# 5. SpecificResourceShape
+#    Validates oa:SpecificResource used as annotation target.
+# -----------------------------------------------------------------------------
+
+geko-sh:SpecificResourceShape a sh:NodeShape ;
+    sh:targetClass oa:SpecificResource ;
+    sh:name "Specific Resource shape" ;
+    sh:description "Validates annotation targets pointing to IIIF canvases or image regions." ;
+
+    # Must have a source (IIIF canvas URI)
+    sh:property [
+        sh:path oa:hasSource ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:name "hasSource" ;
+        sh:message "A SpecificResource must have exactly one oa:hasSource pointing to an IRI." ;
+    ] ;
+
+    # Must have a selector (FragmentSelector with xywh coordinates)
+    sh:property [
+        sh:path oa:hasSelector ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class oa:FragmentSelector ;
+        sh:name "hasSelector" ;
+        sh:message "A SpecificResource must have exactly one oa:hasSelector of type oa:FragmentSelector." ;
+    ] .
+
+
+# -----------------------------------------------------------------------------
+# 6. FragmentSelectorShape
+#    Validates oa:FragmentSelector with xywh media fragment value.
+# -----------------------------------------------------------------------------
+
+geko-sh:FragmentSelectorShape a sh:NodeShape ;
+    sh:targetClass oa:FragmentSelector ;
+    sh:name "Fragment Selector shape" ;
+    sh:description "Validates fragment selectors using xywh media fragment syntax." ;
+
+    sh:property [
+        sh:path rdf:value ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:pattern "^xywh=\\d+,\\d+,\\d+,\\d+$" ;
+        sh:name "value" ;
+        sh:message "A FragmentSelector must have an rdf:value matching the pattern 'xywh=x,y,w,h'." ;
+    ] .
+
+
+# -----------------------------------------------------------------------------
+# 7. AnchorShape
+#    Validates mlao:Anchor nodes.
+#    Note: in practice, anchors may be empty (no identified referent yet).
+# -----------------------------------------------------------------------------
+
+geko-sh:AnchorShape a sh:NodeShape ;
+    sh:targetClass mlao:Anchor ;
+    sh:name "Anchor shape" ;
+    sh:description "Validates MLAO Anchor nodes linking annotations to CRM entities and iconographic levels." ;
+
+    # When present, isAnchoredTo must point to a CRM entity (IRI)
+    sh:property [
+        sh:path mlao:isAnchoredTo ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:name "isAnchoredTo" ;
+        sh:severity sh:Warning ;
+        sh:message "An Anchor should have an mlao:isAnchoredTo pointing to a crm:E1_CRM_Entity IRI." ;
+    ] ;
+
+    # When present, hasConceptualLevel must be one of the ICOn levels
+    sh:property [
+        sh:path mlao:hasConceptualLevel ;
+        sh:maxCount 1 ;
+        sh:in ( icon:PreiconographicalSubject icon:IconographicalSubject icon:IconologicalSubject ) ;
+        sh:name "hasConceptualLevel" ;
+        sh:severity sh:Warning ;
+        sh:message "An Anchor should declare mlao:hasConceptualLevel from {PreiconographicalSubject, IconographicalSubject, IconologicalSubject}." ;
+    ] .
+
+
+# -----------------------------------------------------------------------------
+# 8. InterpretationActShape
+#    Validates hico:InterpretationAct provenance nodes.
+# -----------------------------------------------------------------------------
+
+geko-sh:InterpretationActShape a sh:NodeShape ;
+    sh:targetClass hico:InterpretationAct ;
+    sh:name "Interpretation Act shape" ;
+    sh:description "Validates the provenance of an annotation interpretation." ;
+
+    # Must declare interpretation type
+    sh:property [
+        sh:path hico:hasInterpretationType ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:name "hasInterpretationType" ;
+        sh:message "An InterpretationAct must have exactly one hico:hasInterpretationType." ;
+    ] ;
+
+    # Must declare at least one interpretation criterion
+    sh:property [
+        sh:path hico:hasInterpretationCriterion ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:name "hasInterpretationCriterion" ;
+        sh:message "An InterpretationAct must have at least one hico:hasInterpretationCriterion." ;
+    ] .
+
+
+# -----------------------------------------------------------------------------
+# 9. PersonShape
+#    Validates foaf:Person used as ekphrasis author.
+# -----------------------------------------------------------------------------
+
+geko-sh:PersonShape a sh:NodeShape ;
+    sh:targetClass foaf:Person ;
+    sh:name "Person shape" ;
+    sh:description "Validates person entities used as ekphrasis authors." ;
+
+    sh:property [
+        sh:path foaf:name ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:minLength 1 ;
+        sh:name "name" ;
+        sh:message "A Person must have exactly one non-empty foaf:name." ;
+    ] .
+
+
+# -----------------------------------------------------------------------------
+# 10. F2_ExpressionShape (Textual Referent)
+# -----------------------------------------------------------------------------
+
+geko-sh:F2ExpressionShape a sh:NodeShape ;
+    sh:targetClass lrmoo:F2_Expression ;
+    sh:name "F2 Expression shape" ;
+    sh:description "Validates textual referents of ekphrasis." ;
+
+    sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:name "label" ;
+        sh:severity sh:Warning ;
+        sh:message "An F2_Expression should have at least one rdfs:label." ;
+    ] .
+
+
+# -----------------------------------------------------------------------------
+# 11. F1_WorkShape (Iconic Referent)
+# -----------------------------------------------------------------------------
+
+geko-sh:F1WorkShape a sh:NodeShape ;
+    sh:targetClass lrmoo:F1_Work ;
+    sh:name "F1 Work shape" ;
+    sh:description "Validates iconic referents (artworks) of ekphrasis." ;
+
+    sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:name "label" ;
+        sh:severity sh:Warning ;
+        sh:message "An F1_Work should have at least one rdfs:label identifying the artwork." ;
+    ] .
+
+
+# -----------------------------------------------------------------------------
+# 12. EkphrasticModalityConceptShape
+#    Ensures SKOS Concepts used as modalities belong to the right scheme.
+# -----------------------------------------------------------------------------
+
+geko-sh:EkphrasticModalityConceptShape a sh:NodeShape ;
+    sh:targetNode geko:denotation, geko:dynamization, geko:integration ;
+    sh:name "Ekphrastic Modality Concept shape" ;
+    sh:description "Validates that ekphrastic modality concepts belong to the GEkO modalities scheme." ;
+
+    sh:property [
+        sh:path skos:inScheme ;
+        sh:hasValue geko:modalitiesScheme ;
+        sh:minCount 1 ;
+        sh:name "inScheme" ;
+        sh:message "An ekphrastic modality concept must belong to geko:modalitiesScheme." ;
+    ] .
