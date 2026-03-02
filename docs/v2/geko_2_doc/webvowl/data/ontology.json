@@ -1,0 +1,928 @@
+{
+  "_comment" : "Created with OWL2VOWL (version 0.3.5), http://vowl.visualdataweb.org",
+  "header" : {
+    "languages" : [ "en", "undefined" ],
+    "baseIris" : [ "http://www.w3.org/1999/02/22-rdf-syntax-ns", "https://iiif.io/api/model/shared-canvas/1.0/", "https://w3id.org/mlao/", "http://iflastandards.info/ns/lrm/lrmoo", "https://w3id.org/geko/", "http://www.w3.org/2001/XMLSchema", "http://www.w3.org/2000/01/rdf-schema", "http://www.w3.org/ns/prov", "http://www.w3.org/ns/oa", "http://purl.org/dc/terms", "http://www.cidoc-crm.org/cidoc-crm", "http://xmlns.com/foaf/0.1", "http://purl.org/emmedi/hico", "https://w3id.org/icon/ontology", "http://www.w3.org/2004/02/skos/core" ],
+    "title" : {
+      "undefined" : "GEkO Ontology v2"
+    },
+    "iri" : "https://w3id.org/geko/#",
+    "version" : "2.0.0",
+    "author" : [ "https://orcid.org/0009-0003-0559-0409" ],
+    "description" : {
+      "en" : "GEkO Ontology describes the phenomenon of ekphrasis along with technical implementation of image-text relations using annotations."
+    },
+    "other" : {
+      "priorVersion" : [ {
+        "identifier" : "priorVersion",
+        "language" : "undefined",
+        "value" : "https://w3id.org/geko/v1/#",
+        "type" : "iri"
+      } ],
+      "creator" : [ {
+        "identifier" : "creator",
+        "language" : "undefined",
+        "value" : "https://orcid.org/0009-0003-0559-0409",
+        "type" : "iri"
+      } ],
+      "changeNote" : [ {
+        "identifier" : "changeNote",
+        "language" : "en",
+        "value" : "**Version 2 Changelog** Introduction of four aspects: - hasForm ObjectProperty deprecated; NotionalEkphrasis and MimeticEkphrasis classes become subClassOf Ekphrasis - Aligment of Ekphrasis with CIDOC-CRM instantiated as subClassOf E33_Linguistic_Object - Transition to SKOS Concept to identify the ekphrastic modelities (denotation, dynamization, integration), prior modeled as classes - Definition of an ObjectProperty hasAuthor for signaling the author of Ekphrasis, more specifical than dct:creator",
+        "type" : "label"
+      } ],
+      "versionInfo" : [ {
+        "identifier" : "versionInfo",
+        "language" : "undefined",
+        "value" : "2.0.0",
+        "type" : "label"
+      } ],
+      "title" : [ {
+        "identifier" : "title",
+        "language" : "undefined",
+        "value" : "GEkO Ontology v2",
+        "type" : "label"
+      } ]
+    }
+  },
+  "namespace" : [ ],
+  "class" : [ {
+    "id" : "0",
+    "type" : "owl:Class"
+  }, {
+    "id" : "5",
+    "type" : "owl:Class"
+  }, {
+    "id" : "9",
+    "type" : "owl:Class"
+  }, {
+    "id" : "10",
+    "type" : "owl:Class"
+  }, {
+    "id" : "11",
+    "type" : "owl:Class"
+  }, {
+    "id" : "12",
+    "type" : "owl:Class"
+  }, {
+    "id" : "1",
+    "type" : "owl:Class"
+  }, {
+    "id" : "15",
+    "type" : "owl:Class"
+  }, {
+    "id" : "3",
+    "type" : "owl:Class"
+  }, {
+    "id" : "17",
+    "type" : "owl:Class"
+  }, {
+    "id" : "18",
+    "type" : "owl:Class"
+  }, {
+    "id" : "7",
+    "type" : "owl:Class"
+  }, {
+    "id" : "19",
+    "type" : "owl:Class"
+  }, {
+    "id" : "20",
+    "type" : "owl:Class"
+  }, {
+    "id" : "24",
+    "type" : "owl:Class"
+  }, {
+    "id" : "27",
+    "type" : "owl:Class"
+  }, {
+    "id" : "31",
+    "type" : "owl:Class"
+  }, {
+    "id" : "33",
+    "type" : "owl:Class"
+  }, {
+    "id" : "34",
+    "type" : "owl:Class"
+  }, {
+    "id" : "23",
+    "type" : "rdfs:Datatype"
+  }, {
+    "id" : "36",
+    "type" : "rdfs:Datatype"
+  }, {
+    "id" : "30",
+    "type" : "rdfs:Datatype"
+  }, {
+    "id" : "14",
+    "type" : "owl:Thing"
+  }, {
+    "id" : "46",
+    "type" : "owl:Class"
+  }, {
+    "id" : "47",
+    "type" : "owl:Class"
+  }, {
+    "id" : "4",
+    "type" : "owl:unionOf"
+  }, {
+    "id" : "40",
+    "type" : "owl:Class"
+  }, {
+    "id" : "50",
+    "type" : "owl:Class"
+  }, {
+    "id" : "8",
+    "type" : "owl:Class"
+  }, {
+    "id" : "44",
+    "type" : "owl:Class"
+  }, {
+    "id" : "54",
+    "type" : "owl:Class"
+  }, {
+    "id" : "58",
+    "type" : "owl:Class"
+  }, {
+    "id" : "61",
+    "type" : "owl:Class"
+  } ],
+  "classAttribute" : [ {
+    "iri" : "http://www.w3.org/ns/oa#Annotation",
+    "baseIri" : "http://www.w3.org/ns/oa",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Annotation"
+    },
+    "attributes" : [ "external" ],
+    "id" : "0",
+    "superClasses" : [ "1" ]
+  }, {
+    "iri" : "http://www.w3.org/2004/02/skos/core#Concept",
+    "baseIri" : "http://www.w3.org/2004/02/skos/core",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Concept"
+    },
+    "individuals" : [ {
+      "iri" : "https://w3id.org/geko/#dynamization",
+      "baseIri" : "https://w3id.org/geko/",
+      "annotations" : {
+        "inScheme" : [ {
+          "identifier" : "inScheme",
+          "language" : "undefined",
+          "value" : "https://w3id.org/geko/#modalitiesScheme",
+          "type" : "iri"
+        } ],
+        "prefLabel" : [ {
+          "identifier" : "prefLabel",
+          "language" : "en",
+          "value" : "Dynamization",
+          "type" : "label"
+        } ],
+        "definition" : [ {
+          "identifier" : "definition",
+          "language" : "en",
+          "value" : "Modality in which the text engages with the referenced object, mainly by describing the scene characterized by a dynamic movement.",
+          "type" : "label"
+        } ]
+      },
+      "labels" : {
+        "IRI-based" : "dynamization"
+      }
+    }, {
+      "iri" : "https://w3id.org/geko/#denotation",
+      "baseIri" : "https://w3id.org/geko/",
+      "annotations" : {
+        "inScheme" : [ {
+          "identifier" : "inScheme",
+          "language" : "undefined",
+          "value" : "https://w3id.org/geko/#modalitiesScheme",
+          "type" : "iri"
+        } ],
+        "prefLabel" : [ {
+          "identifier" : "prefLabel",
+          "language" : "en",
+          "value" : "Denotation",
+          "type" : "label"
+        } ],
+        "definition" : [ {
+          "identifier" : "definition",
+          "language" : "en",
+          "value" : "Modality through which the text engages with the referenced visual object, mainly characterized by indexical relations and verbal identification of visible attributes in the scene.",
+          "type" : "label"
+        } ]
+      },
+      "labels" : {
+        "IRI-based" : "denotation"
+      }
+    }, {
+      "iri" : "https://w3id.org/geko/#integration",
+      "baseIri" : "https://w3id.org/geko/",
+      "annotations" : {
+        "inScheme" : [ {
+          "identifier" : "inScheme",
+          "language" : "undefined",
+          "value" : "https://w3id.org/geko/#modalitiesScheme",
+          "type" : "iri"
+        } ],
+        "prefLabel" : [ {
+          "identifier" : "prefLabel",
+          "language" : "en",
+          "value" : "Integration",
+          "type" : "label"
+        } ],
+        "definition" : [ {
+          "identifier" : "definition",
+          "language" : "en",
+          "value" : "Modality in which the text engages with the referenced object by integrating the description with elements or symbolic content not directly pertaining to the scene in a strict sense.",
+          "type" : "label"
+        } ]
+      },
+      "labels" : {
+        "IRI-based" : "integration"
+      }
+    } ],
+    "attributes" : [ "external" ],
+    "id" : "5"
+  }, {
+    "iri" : "http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity",
+    "baseIri" : "http://www.cidoc-crm.org/cidoc-crm",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "E1_CRM_Entity"
+    },
+    "attributes" : [ "external" ],
+    "id" : "9"
+  }, {
+    "iri" : "https://w3id.org/icon/ontology/IconologicalSubject",
+    "baseIri" : "https://w3id.org/icon/ontology",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "IconologicalSubject"
+    },
+    "attributes" : [ "external" ],
+    "id" : "10"
+  }, {
+    "iri" : "http://purl.org/emmedi/hico/InterpretationAct",
+    "baseIri" : "http://purl.org/emmedi/hico",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "InterpretationAct"
+    },
+    "attributes" : [ "external" ],
+    "id" : "11"
+  }, {
+    "iri" : "https://w3id.org/geko/#NotionalEkphrasis",
+    "baseIri" : "https://w3id.org/geko/",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "NotionalEkphrasis"
+    },
+    "comment" : {
+      "en" : "An ekphrasis describing an imagined artwork that exists only within the describing text."
+    },
+    "id" : "12",
+    "superClasses" : [ "8" ]
+  }, {
+    "iri" : "http://www.w3.org/ns/prov#Entity",
+    "baseIri" : "http://www.w3.org/ns/prov",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Entity"
+    },
+    "subClasses" : [ "0" ],
+    "attributes" : [ "external" ],
+    "id" : "1"
+  }, {
+    "iri" : "http://www.w3.org/ns/oa#Text",
+    "baseIri" : "http://www.w3.org/ns/oa",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Text"
+    },
+    "attributes" : [ "external" ],
+    "id" : "15"
+  }, {
+    "iri" : "https://w3id.org/mlao/#Anchor",
+    "baseIri" : "https://w3id.org/mlao/",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Anchor"
+    },
+    "attributes" : [ "external" ],
+    "id" : "3"
+  }, {
+    "iri" : "http://www.w3.org/2004/02/skos/core#ConceptScheme",
+    "baseIri" : "http://www.w3.org/2004/02/skos/core",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "ConceptScheme"
+    },
+    "individuals" : [ {
+      "iri" : "https://w3id.org/geko/#modalitiesScheme",
+      "baseIri" : "https://w3id.org/geko/",
+      "annotations" : {
+        "prefLabel" : [ {
+          "identifier" : "prefLabel",
+          "language" : "en",
+          "value" : "Ekphrastic modalities scheme",
+          "type" : "label"
+        } ],
+        "definition" : [ {
+          "identifier" : "definition",
+          "language" : "en",
+          "value" : "Controlled vocabulary of modalities used in GEkO2 to characterize ekphrastic rhetorical modalities.",
+          "type" : "label"
+        } ],
+        "title" : [ {
+          "identifier" : "title",
+          "language" : "en",
+          "value" : "Ekphrastic Modalities",
+          "type" : "label"
+        } ]
+      },
+      "labels" : {
+        "IRI-based" : "modalitiesScheme"
+      }
+    } ],
+    "attributes" : [ "external" ],
+    "id" : "17"
+  }, {
+    "iri" : "http://www.w3.org/ns/oa#TextualBody",
+    "baseIri" : "http://www.w3.org/ns/oa",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "TextualBody"
+    },
+    "attributes" : [ "external" ],
+    "id" : "18"
+  }, {
+    "iri" : "http://iflastandards.info/ns/lrm/lrmoo/F2_Expression",
+    "baseIri" : "http://iflastandards.info/ns/lrm/lrmoo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "F2_Expression"
+    },
+    "attributes" : [ "external" ],
+    "id" : "7"
+  }, {
+    "iri" : "https://w3id.org/geko/#MimeticEkphrasis",
+    "baseIri" : "https://w3id.org/geko/",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "MimeticEkphrasis"
+    },
+    "comment" : {
+      "en" : "An ekphrasis describing a real, physically existing artwork."
+    },
+    "id" : "19",
+    "superClasses" : [ "8" ]
+  }, {
+    "iri" : "http://www.cidoc-crm.org/cidoc-crm/E33_Linguistic_Object",
+    "baseIri" : "http://www.cidoc-crm.org/cidoc-crm",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "E33_Linguistic_Object"
+    },
+    "subClasses" : [ "8" ],
+    "attributes" : [ "external" ],
+    "id" : "20"
+  }, {
+    "iri" : "http://www.w3.org/ns/oa#FragmentSelector",
+    "baseIri" : "http://www.w3.org/ns/oa",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "FragmentSelector"
+    },
+    "attributes" : [ "external" ],
+    "id" : "24"
+  }, {
+    "iri" : "http://xmlns.com/foaf/0.1/Person",
+    "baseIri" : "http://xmlns.com/foaf/0.1",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Person"
+    },
+    "attributes" : [ "external" ],
+    "id" : "27"
+  }, {
+    "iri" : "http://purl.org/emmedi/hico/InterpretationCriterion",
+    "baseIri" : "http://purl.org/emmedi/hico",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "InterpretationCriterion"
+    },
+    "attributes" : [ "external" ],
+    "id" : "31"
+  }, {
+    "iri" : "http://www.w3.org/ns/oa#XPathSelector",
+    "baseIri" : "http://www.w3.org/ns/oa",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "XPathSelector"
+    },
+    "attributes" : [ "external" ],
+    "id" : "33"
+  }, {
+    "iri" : "http://www.w3.org/ns/oa#SpecificResource",
+    "baseIri" : "http://www.w3.org/ns/oa",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "SpecificResource"
+    },
+    "attributes" : [ "external" ],
+    "id" : "34"
+  }, {
+    "iri" : "http://www.w3.org/2001/XMLSchema#dateTime",
+    "baseIri" : "http://www.w3.org/2001/XMLSchema",
+    "id" : "23",
+    "label" : {
+      "IRI-based" : "dateTime"
+    }
+  }, {
+    "iri" : "http://www.w3.org/2001/XMLSchema#string",
+    "baseIri" : "http://www.w3.org/2001/XMLSchema",
+    "id" : "36",
+    "label" : {
+      "IRI-based" : "string"
+    }
+  }, {
+    "iri" : "http://www.w3.org/2001/XMLSchema#string",
+    "baseIri" : "http://www.w3.org/2001/XMLSchema",
+    "id" : "30",
+    "label" : {
+      "IRI-based" : "string"
+    }
+  }, {
+    "iri" : "http://www.w3.org/2002/07/owl#Thing",
+    "baseIri" : "http://owl2vowl.de",
+    "id" : "14",
+    "label" : {
+      "undefined" : "Thing"
+    }
+  }, {
+    "iri" : "https://w3id.org/icon/ontology/IconographicalSubject",
+    "baseIri" : "https://w3id.org/icon/ontology",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "IconographicalSubject"
+    },
+    "attributes" : [ "external" ],
+    "id" : "46"
+  }, {
+    "iri" : "https://iiif.io/api/model/shared-canvas/1.0/#Canvas",
+    "baseIri" : "https://iiif.io/api/model/shared-canvas/1.0/",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Canvas"
+    },
+    "attributes" : [ "external" ],
+    "id" : "47"
+  }, {
+    "instances" : 0,
+    "union" : [ "46", "50", "10" ],
+    "attributes" : [ "anonymous", "union" ],
+    "id" : "4"
+  }, {
+    "iri" : "http://www.w3.org/ns/prov#Collection",
+    "baseIri" : "http://www.w3.org/ns/prov",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Collection"
+    },
+    "subClasses" : [ "8" ],
+    "attributes" : [ "external" ],
+    "id" : "40"
+  }, {
+    "iri" : "https://w3id.org/icon/ontology/PreiconographicalSubject",
+    "baseIri" : "https://w3id.org/icon/ontology",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "PreiconographicalSubject"
+    },
+    "attributes" : [ "external" ],
+    "id" : "50"
+  }, {
+    "iri" : "https://w3id.org/geko/#Ekphrasis",
+    "baseIri" : "https://w3id.org/geko/",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Ekphrasis"
+    },
+    "subClasses" : [ "12", "19" ],
+    "comment" : {
+      "en" : "The Ekphrasis entity, modeled as a Linguistic Object and a Collection of Annotations."
+    },
+    "id" : "8",
+    "superClasses" : [ "20", "40" ]
+  }, {
+    "iri" : "http://iflastandards.info/ns/lrm/lrmoo/F1_Work",
+    "baseIri" : "http://iflastandards.info/ns/lrm/lrmoo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "F1_Work"
+    },
+    "attributes" : [ "external" ],
+    "id" : "44"
+  }, {
+    "iri" : "http://purl.org/emmedi/hico/InterpretationType",
+    "baseIri" : "http://purl.org/emmedi/hico",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "InterpretationType"
+    },
+    "attributes" : [ "external" ],
+    "id" : "54"
+  }, {
+    "iri" : "https://iiif.io/api/model/shared-canvas/1.0/#Manifest",
+    "baseIri" : "https://iiif.io/api/model/shared-canvas/1.0/",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Manifest"
+    },
+    "attributes" : [ "external" ],
+    "id" : "58"
+  }, {
+    "iri" : "http://www.w3.org/ns/oa#Motivation",
+    "baseIri" : "http://www.w3.org/ns/oa",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Motivation"
+    },
+    "attributes" : [ "external" ],
+    "id" : "61"
+  } ],
+  "property" : [ {
+    "id" : "2",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "6",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "13",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "16",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "21",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "22",
+    "type" : "owl:datatypeProperty"
+  }, {
+    "id" : "25",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "26",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "28",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "29",
+    "type" : "owl:datatypeProperty"
+  }, {
+    "id" : "32",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "35",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "37",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "38",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "39",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "41",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "42",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "43",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "48",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "49",
+    "type" : "owl:disjointWith"
+  }, {
+    "id" : "51",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "52",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "45",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "53",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "55",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "56",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "57",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "59",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "60",
+    "type" : "owl:datatypeProperty"
+  } ],
+  "propertyAttribute" : [ {
+    "iri" : "https://w3id.org/mlao/#hasConceptualLevel",
+    "baseIri" : "https://w3id.org/mlao/",
+    "range" : "4",
+    "label" : {
+      "IRI-based" : "hasConceptualLevel"
+    },
+    "domain" : "3",
+    "attributes" : [ "external", "object" ],
+    "id" : "2"
+  }, {
+    "iri" : "https://w3id.org/geko/#isTextualReferentOf",
+    "baseIri" : "https://w3id.org/geko/",
+    "range" : "8",
+    "label" : {
+      "IRI-based" : "isTextualReferentOf"
+    },
+    "domain" : "7",
+    "attributes" : [ "object" ],
+    "id" : "6"
+  }, {
+    "iri" : "http://www.w3.org/ns/oa#hasSelector",
+    "baseIri" : "http://www.w3.org/ns/oa",
+    "range" : "14",
+    "label" : {
+      "IRI-based" : "hasSelector"
+    },
+    "domain" : "14",
+    "attributes" : [ "external", "object" ],
+    "id" : "13"
+  }, {
+    "iri" : "http://purl.org/emmedi/hico/hasInterpretationCriterion",
+    "baseIri" : "http://purl.org/emmedi/hico",
+    "range" : "14",
+    "label" : {
+      "IRI-based" : "hasInterpretationCriterion"
+    },
+    "domain" : "14",
+    "attributes" : [ "external", "object" ],
+    "id" : "16"
+  }, {
+    "iri" : "https://w3id.org/geko/#hasTextualReferent",
+    "inverse" : "6",
+    "baseIri" : "https://w3id.org/geko/",
+    "range" : "7",
+    "label" : {
+      "IRI-based" : "hasTextualReferent"
+    },
+    "domain" : "8",
+    "comment" : {
+      "en" : "Links the ekphrasis to the specific textual expression containing the description."
+    },
+    "attributes" : [ "object" ],
+    "id" : "21"
+  }, {
+    "iri" : "http://purl.org/dc/terms/created",
+    "baseIri" : "http://purl.org/dc/terms",
+    "range" : "23",
+    "label" : {
+      "IRI-based" : "created"
+    },
+    "domain" : "14",
+    "attributes" : [ "external", "datatype" ],
+    "id" : "22"
+  }, {
+    "iri" : "https://w3id.org/geko/#hasEkphrasticModality",
+    "baseIri" : "https://w3id.org/geko/",
+    "range" : "5",
+    "label" : {
+      "IRI-based" : "hasEkphrasticModality"
+    },
+    "domain" : "0",
+    "comment" : {
+      "en" : "Indicates the rhetorical modality recognizable in a textual passage within ekphrastic description"
+    },
+    "attributes" : [ "object" ],
+    "id" : "25"
+  }, {
+    "iri" : "https://w3id.org/geko/#isAuthorOf",
+    "baseIri" : "https://w3id.org/geko/",
+    "range" : "8",
+    "label" : {
+      "IRI-based" : "isAuthorOf"
+    },
+    "domain" : "27",
+    "attributes" : [ "object" ],
+    "id" : "26"
+  }, {
+    "range" : "8",
+    "domain" : "19",
+    "attributes" : [ "object", "anonymous" ],
+    "id" : "28"
+  }, {
+    "iri" : "http://xmlns.com/foaf/0.1/name",
+    "baseIri" : "http://xmlns.com/foaf/0.1",
+    "range" : "30",
+    "label" : {
+      "IRI-based" : "name"
+    },
+    "domain" : "27",
+    "attributes" : [ "external", "datatype" ],
+    "id" : "29"
+  }, {
+    "iri" : "http://www.w3.org/ns/prov#wasGeneratedBy",
+    "baseIri" : "http://www.w3.org/ns/prov",
+    "range" : "11",
+    "label" : {
+      "IRI-based" : "wasGeneratedBy"
+    },
+    "domain" : "0",
+    "attributes" : [ "external", "object" ],
+    "id" : "32"
+  }, {
+    "iri" : "https://w3id.org/mlao/#isAnchoredTo",
+    "baseIri" : "https://w3id.org/mlao/",
+    "range" : "9",
+    "label" : {
+      "IRI-based" : "isAnchoredTo"
+    },
+    "domain" : "3",
+    "attributes" : [ "external", "object" ],
+    "id" : "35"
+  }, {
+    "range" : "1",
+    "domain" : "0",
+    "attributes" : [ "object", "anonymous" ],
+    "id" : "37"
+  }, {
+    "range" : "20",
+    "domain" : "8",
+    "attributes" : [ "object", "anonymous" ],
+    "id" : "38"
+  }, {
+    "range" : "40",
+    "domain" : "8",
+    "attributes" : [ "object", "anonymous" ],
+    "id" : "39"
+  }, {
+    "iri" : "http://www.w3.org/ns/prov#hadMember",
+    "baseIri" : "http://www.w3.org/ns/prov",
+    "range" : "0",
+    "label" : {
+      "IRI-based" : "hadMember"
+    },
+    "domain" : "8",
+    "attributes" : [ "external", "object" ],
+    "id" : "41"
+  }, {
+    "range" : "8",
+    "domain" : "12",
+    "attributes" : [ "object", "anonymous" ],
+    "id" : "42"
+  }, {
+    "iri" : "https://w3id.org/geko/#hasIconicReferent",
+    "inverse" : "45",
+    "baseIri" : "https://w3id.org/geko/",
+    "range" : "44",
+    "label" : {
+      "IRI-based" : "hasIconicReferent"
+    },
+    "domain" : "8",
+    "comment" : {
+      "en" : "Links the ekphrasis to the visual artwork described, indetifiable as a Work entity according to FRBR WEMI structure."
+    },
+    "attributes" : [ "object" ],
+    "id" : "43"
+  }, {
+    "iri" : "https://w3id.org/mlao/#hasAnchor",
+    "baseIri" : "https://w3id.org/mlao/",
+    "range" : "3",
+    "label" : {
+      "IRI-based" : "hasAnchor"
+    },
+    "domain" : "0",
+    "comment" : {
+      "en" : "This property links the annotation to the conceptual referent of the annotation."
+    },
+    "attributes" : [ "external", "object" ],
+    "id" : "48"
+  }, {
+    "range" : "12",
+    "domain" : "19",
+    "attributes" : [ "object", "anonymous" ],
+    "id" : "49"
+  }, {
+    "iri" : "http://www.w3.org/ns/oa#hasTarget",
+    "baseIri" : "http://www.w3.org/ns/oa",
+    "range" : "14",
+    "label" : {
+      "IRI-based" : "hasTarget"
+    },
+    "domain" : "14",
+    "comment" : {
+      "en" : "In GEkO it is the property that connects the textual passage to the informational layer. In GEkO the target is double, the first connecting the text to the digital fascimile in which it is contained, the second connecting the text to the digital reproduction of the visual object described. Typically, the two targets address canvas of a IIIF manifest."
+    },
+    "attributes" : [ "external", "object" ],
+    "id" : "51"
+  }, {
+    "iri" : "http://purl.org/dc/terms/isPartOf",
+    "baseIri" : "http://purl.org/dc/terms",
+    "range" : "14",
+    "label" : {
+      "IRI-based" : "isPartOf"
+    },
+    "domain" : "14",
+    "attributes" : [ "external", "object" ],
+    "id" : "52"
+  }, {
+    "iri" : "https://w3id.org/geko/#isIconicReferentOf",
+    "baseIri" : "https://w3id.org/geko/",
+    "range" : "8",
+    "label" : {
+      "IRI-based" : "isIconicReferentOf"
+    },
+    "domain" : "44",
+    "attributes" : [ "object" ],
+    "id" : "45"
+  }, {
+    "iri" : "https://w3id.org/geko/#hasAuthor",
+    "inverse" : "26",
+    "baseIri" : "https://w3id.org/geko/",
+    "range" : "27",
+    "label" : {
+      "IRI-based" : "hasAuthor"
+    },
+    "domain" : "8",
+    "comment" : {
+      "en" : "The author of the ekphrasis."
+    },
+    "attributes" : [ "object" ],
+    "id" : "53"
+  }, {
+    "iri" : "http://purl.org/emmedi/hico/hasInterpretationType",
+    "baseIri" : "http://purl.org/emmedi/hico",
+    "range" : "14",
+    "label" : {
+      "IRI-based" : "hasInterpretationType"
+    },
+    "domain" : "14",
+    "attributes" : [ "external", "object" ],
+    "id" : "55"
+  }, {
+    "iri" : "http://www.w3.org/ns/oa#hasBody",
+    "baseIri" : "http://www.w3.org/ns/oa",
+    "range" : "14",
+    "label" : {
+      "IRI-based" : "hasBody"
+    },
+    "domain" : "14",
+    "comment" : {
+      "en" : "In GEkO it is the proporty that connects an annotation to its body intended as the ekphrastic textual passage identified by the annotator."
+    },
+    "attributes" : [ "external", "object" ],
+    "id" : "56"
+  }, {
+    "iri" : "http://www.w3.org/ns/oa#motivatedBy",
+    "baseIri" : "http://www.w3.org/ns/oa",
+    "range" : "14",
+    "label" : {
+      "IRI-based" : "motivatedBy"
+    },
+    "domain" : "14",
+    "attributes" : [ "external", "object" ],
+    "id" : "57"
+  }, {
+    "iri" : "http://www.w3.org/ns/oa#hasSource",
+    "baseIri" : "http://www.w3.org/ns/oa",
+    "range" : "14",
+    "label" : {
+      "IRI-based" : "hasSource"
+    },
+    "domain" : "14",
+    "attributes" : [ "external", "object" ],
+    "id" : "59"
+  }, {
+    "iri" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#value",
+    "baseIri" : "http://www.w3.org/1999/02/22-rdf-syntax-ns",
+    "range" : "36",
+    "label" : {
+      "IRI-based" : "value"
+    },
+    "domain" : "14",
+    "attributes" : [ "external", "datatype" ],
+    "id" : "60"
+  } ]
+}
